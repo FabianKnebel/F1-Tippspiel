@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>F1 Tippspiel</title>
+    <style>
+        body.light-mode {
+            padding: 20px;
+            background-color: white;
+            color: black;
+            font-size: 25px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        table.tabelle_gesamt th {
+            background-color: black;
+            color: white;
+        }
+
+        .buttonwrapper {
+            text-align: center;
+        }
+
+        .column33 {
+          float: left;
+          width: 33%;
+        }
+        .column50 {
+          float: left;
+          width: 50%;
+        }
+        .column66 {
+          float: left;
+          width: 66%;
+        }
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
+        th:empty{
+            visibility: hidden;
+        }
+        td:empty{
+            visibility: hidden;
+        }
+        table.tabelle_einzelnd tr:nth-child(even) {
+            background-color: #eee;
+        }
+        table.tabelle_einzelnd tr:nth-child(odd) {
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body id="body" class="light-mode">
+
+<div>
+    <table style="width:20%" align="center" class="tabelle_gesamt">
+        <caption style="padding-bottom:2%;"><b>Gesamtpunktestand</b></caption>
+        <tr>
+            <th>Platz</th>
+            <th>Name</th>
+            <th>Punkte</th>
+        </tr>
+        <tr>
+            <td>1.</td>
+            <td>Fabian</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>Jan-Philip</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td>Lea</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>4.</td>
+            <td>Philipp</td>
+            <td>0</td>
+        </tr>
+    </table>
+</div>
+<hr>
+
+<div align="center">
+    <a href="https://docs.google.com/spreadsheets/d/17ll6U13lleRD-XJ0pDEskA96i_knYogba_O-B4B6rMk/edit?usp=sharing">HIER Tipps abgeben</a>
+</div>
+<hr>
+
+<div class="buttonwrapper">
+    <button onclick="showhideRegeln()">Regeln ein-/ausklappen</button>
+</div>
+<script>
+function showhideRegeln() {
+  var x = document.getElementById("regeln");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+<div id="regeln">
+    <h2>Regeln:</h2>
+    <p>Es werden <b><strong>pro Rennwochenende 7 Tipps abgegeben</strong></b> - einer für die <b>Pole Position</b>, einer für die <b>schnellste Rennrunde</b> und die restlichen für die <b>Top 5</b>. (Dabei zählt das offizielle Endergebnis inkl. Strafen usw.) Tipps müssen bis spätestens zum Start der jweiligen Session abgegeben werden.</p>
+
+    <div class="row">
+        <div class="column33">
+            <p>Falls <b>richtig getippt</b> wurde, gibt es folgende Punkte:</p>
+            <table class="punkte_zuweisung">
+                <tr>
+                    <td>Pole Position</td>
+                    <td>50 Punkte</td>
+                </tr>
+                <tr>
+                    <td>Schnellste Runde</td>
+                    <td>50 Punkte</td>
+                </tr>
+                <tr>
+                    <td>Platz 1</td>
+                    <td>100 Punkte</td>
+                </tr>
+                <tr>
+                    <td>Platz 2</td>
+                    <td>90 Punkte</td>
+                </tr>
+                <tr>
+                    <td>Platz 3</td>
+                    <td>80 Punkte</td>
+                </tr>
+                <tr>
+                    <td>Platz 4</td>
+                    <td>70 Punkte</td>
+                </tr>
+                <tr>
+                    <td>Platz 5</td>
+                    <td>60 Punkte</td>
+                </tr>
+            </table>
+        </div>
+        <div class="column33">
+            <p>Falls <b>nicht richtig getippt</b> wurde, gibt es für die Platzdifferenz (Tipp-Ergebnis) Punkte:</p>
+            <table class="punkte_zuweisung">
+                <tr>
+                    <td>1 Platz Unterschied</td>
+                    <td>50 Punkte</td>
+                </tr>
+                <tr>
+                    <td>2 Plätze Unterschied</td>
+                    <td>45 Punkte</td>
+                </tr>
+                <tr>
+                    <td>3 Plätze Unterschied</td>
+                    <td>40 Punkte</td>
+                </tr>
+                <tr>
+                    <td>4 Plätze Unterschied</td>
+                    <td>40 Punkte</td>
+                </tr>
+                <tr>
+                    <td>5 Plätze Unterschied</td>
+                    <td>35 Punkte</td>
+                </tr>
+                <tr>
+                    <td>6 Plätze Unterschied</td>
+                    <td>30 Punkte</td>
+                </tr>
+                <tr>
+                    <td>7 Plätze Unterschied</td>
+                    <td>25 Punkte</td>
+                </tr>
+                <tr>
+                    <td>8 Plätze Unterschied</td>
+                    <td>20 Punkte</td>
+                </tr>
+                <tr>
+                    <td>9 Plätze Unterschied</td>
+                    <td>15 Punkte</td>
+                </tr>
+                <tr>
+                    <td>10 Plätze Unterschied</td>
+                    <td>5 Punkte</td>
+                </tr>
+                <tr>
+                    <td>>=11 Plätze Unterschied</td>
+                    <td>0 Punkte</td>
+                </tr>
+            </table>
+        </div>
+        <div class="column33"></div>
+    </div>
+
+    <div class="buttonwrapper" style="padding-top:1%;">
+        <button onclick="showhideBeispiel()">Beispiel ein-/ausklappen</button>
+    </div>
+    <script>
+    function showhideBeispiel() {
+      var x = document.getElementById("beispiel");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+    </script>
+
+    <div id="beispiel" class="row" style="padding-top:2%;">
+        <div class="column66">
+            <p><i>Ein Beispiel:</i> Ein fiktiver<b>(!)</b> Peter Maffay tippt: PP:HAM, SR:HAM, P1:HAM, P2:BOT, P3:VET, P4:LEC, P5:ALB</p>
+            <p>Und das Rennergebnis lautet: PP:BOT, SR:HAM, P1:HAM, P2:LEC, P3:VET, P4:ALB, P5:BOT</p>
+            <p>Dann würde diese fivtive Person insgesamt 370 Punkte bekommen. (PP:falsch → 0 Pkt. + SR:richtig → 50 Pkt. + P1:richtig → 100 Pkt. + P2:falsch → BOT ist auf P5 statt auf P3 → 5-3=2 Plätze Differenz → 45 Pkt. + P3:richtig → 80 Pkt., P4:falsch → LEC ist auf P2 statt auf P4 → 4-2=2 Plätze Differenz → 45 Pkt. + P5:falsch → ALB ist auf P4 statt auf P5 → 5-4=1 Platz Differenz → 50 Pkt. ⇒ 370 Punkte)</p>
+        </div>
+        <div class="column33">
+            <table class="tabelle_beispiel" style="float:left;">
+                <tr>
+                    <th></th>
+                    <th>Tipp Peter</th>
+                    <th>Rennergebnis</th>
+                    <th>Punkte</th>
+                </tr>
+                <tr>
+                    <td>PP</td>
+                    <td>HAM</td>
+                    <td>BOT</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>SR</td>
+                    <td>HAM</td>
+                    <td>HAM</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>P1</td>
+                    <td>HAM</td>
+                    <td>HAM</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>P2</td>
+                    <td>BOT</td>
+                    <td>LEC</td>
+                    <td>45</td>
+                </tr>
+                <tr>
+                    <td>P3</td>
+                    <td>VET</td>
+                    <td>VET</td>
+                    <td>80</td>
+                </tr>
+                <tr>
+                    <td>P4</td>
+                    <td>LEC</td>
+                    <td>ALB</td>
+                    <td>45</td>
+                </tr>
+                <tr>
+                    <td>P5</td>
+                    <td>ALB</td>
+                    <td>BOT</td>
+                    <td>50</td>
+                </tr>
+                    <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>370</b></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div>
+    <table style="width:20%; padding-top:2%" align="center" class="tabelle_einzelnd">
+        <caption style="padding-bottom:2%;"><b>Tipps/Punkte: Rennen 0</b></caption>
+        <tr>
+            <th></th>
+            <th colspan="2">Fabian</th>
+            <th colspan="2">Jan-Philip</th>
+            <th colspan="2">Lea</th>
+            <th colspan="2">Philipp</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Tipp</td>
+            <td>Punkte</td>
+            <td>Tipp</td>
+            <td>Punkte</td>
+            <td>Tipp</td>
+            <td>Punkte</td>
+            <td>Tipp</td>
+            <td>Punkte</td>
+        </tr>
+        <tr>
+            <td>Pole Position</td>
+            <td>HAM</td>
+            <td>0</td>
+            <td>BOT</td>
+            <td>0</td>
+            <td>BOT</td>
+            <td>0</td>
+            <td>VET</td>
+            <td>0</td>
+        </tr>
+            <tr>
+            <td>Schnellste Runde</td>
+            <td>BOT</td>
+            <td>0</td>
+            <td>HAM</td>
+            <td>0</td>
+            <td>HAM</td>
+            <td>0</td>
+            <td>BOT</td>
+            <td>0</td>
+        </tr>
+            <tr>
+            <td>Platz 1</td>
+            <td>HAM</td>
+            <td>0</td>
+            <td>VET</td>
+            <td>0</td>
+            <td>VET</td>
+            <td>0</td>
+            <td>HAM</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Platz 2</td>
+            <td>BOT</td>
+            <td>0</td>
+            <td>LEC</td>
+            <td>0</td>
+            <td>VER</td>
+            <td>0</td>
+            <td>LEC</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Platz 3</td>
+            <td>VER</td>
+            <td>0</td>
+            <td>VER</td>
+            <td>0</td>
+            <td>HAM</td>
+            <td>0</td>
+            <td>VER</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Platz 4</td>
+            <td>LEC</td>
+            <td>0</td>
+            <td>BOT</td>
+            <td>0</td>
+            <td>BOT</td>
+            <td>0</td>
+            <td>BOT</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Platz 5</td>
+            <td>VET</td>
+            <td>0</td>
+            <td>HAM</td>
+            <td>0</td>
+            <td>LEC</td>
+            <td>0</td>
+            <td>VET</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2">0</td>
+            <td colspan="2">0</td>
+            <td colspan="2">0</td>
+            <td colspan="2">0</td>
+        </tr>
+    </table>
+</div>
+<br>
+
+<div class="row">
+    <div class="column50">
+        <table style="width:20%" align="center" class="tabelle_einzelnd">
+            <caption style="padding-bottom:2%;"><b>Tipps/Punkte: Rennen 1</b></caption>
+            <tr>
+                <th></th>
+                <th colspan="2">Fabian</th>
+                <th colspan="2">Jan-Philip</th>
+                <th colspan="2">Lea</th>
+                <th colspan="2">Philipp</th>
+            </tr>
+                <tr>
+                <td></td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+            </tr>
+            <tr>
+                <td>Pole Position</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+                <tr>
+                <td>Schnellste Runde</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+                <tr>
+                <td>Platz 1</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 2</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 3</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 4</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 5</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2">0</td>
+                <td colspan="2">0</td>
+                <td colspan="2">0</td>
+                <td colspan="2">0</td>
+            </tr>
+        </table>
+    </div>
+    <div class="column50">
+        <table style="width:20%" align="center" class="tabelle_einzelnd">
+            <caption style="padding-bottom:2%;"><b>Tipps/Punkte: Rennen 2</b></caption>
+            <tr>
+                <th></th>
+                <th colspan="2">Fabian</th>
+                <th colspan="2">Jan-Philip</th>
+                <th colspan="2">Lea</th>
+                <th colspan="2">Philipp</th>
+            </tr>
+                <tr>
+                <td></td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+            </tr>
+            <tr>
+                <td>Pole Position</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+                <tr>
+                <td>Schnellste Runde</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+                <tr>
+                <td>Platz 1</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 2</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 3</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 4</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 5</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2">0</td>
+                <td colspan="2">0</td>
+                <td colspan="2">0</td>
+                <td colspan="2">0</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="column50">
+        <table style="width:20%" align="center" class="tabelle_einzelnd">
+            <caption style="padding-bottom:2%;"><b>Tipps/Punkte: Rennen 3</b></caption>
+            <tr>
+                <th></th>
+                <th colspan="2">Fabian</th>
+                <th colspan="2">Jan-Philip</th>
+                <th colspan="2">Lea</th>
+                <th colspan="2">Philipp</th>
+            </tr>
+                <tr>
+                <td></td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+            </tr>
+            <tr>
+                <td>Pole Position</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+                <tr>
+                <td>Schnellste Runde</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+                <tr>
+                <td>Platz 1</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 2</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 3</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 4</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 5</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2">0</td>
+                <td colspan="2">0</td>
+                <td colspan="2">0</td>
+                <td colspan="2">0</td>
+            </tr>
+        </table>
+    </div>
+    <div class="column50">
+        <table style="width:20%" align="center" class="tabelle_einzelnd">
+            <caption style="padding-bottom:2%;"><b>Tipps/Punkte: Rennen 4</b></caption>
+            <tr>
+                <th></th>
+                <th colspan="2">Fabian</th>
+                <th colspan="2">Jan-Philip</th>
+                <th colspan="2">Lea</th>
+                <th colspan="2">Philipp</th>
+            </tr>
+                <tr>
+                <td></td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+                <td>Tipp</td>
+                <td>Punkte</td>
+            </tr>
+            <tr>
+                <td>Pole Position</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+                <tr>
+                <td>Schnellste Runde</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+                <tr>
+                <td>Platz 1</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 2</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 3</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 4</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Platz 5</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2">0</td>
+                <td colspan="2">0</td>
+                <td colspan="2">0</td>
+                <td colspan="2">0</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br>
+
+<hr>
+<!-- https://www.rssdog.com/index.php?url=https%3A%2F%2Fwww.formel1.de%2Frss%2Fformel-1%2Ffeed.xml&mode=html&showonly=&maxitems=0&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&linktarget=_blank&textsize=inherit&bordercol=%23d4d0c8&headbgcol=%23999999&headtxtcol=%23ffffff&titlebgcol=%23f1eded&titletxtcol=%23000000&itembgcol=%23ffffff&itemtxtcol=%23000000 -->
+<iframe width="100%" height="750" frameborder="0" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fwww.formel1.de%2Frss%2Fformel-1%2Ffeed.xml&mode=html&showonly=&maxitems=0&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&linktarget=_blank&textsize=inherit&bordercol=%23d4d0c8&headbgcol=%23999999&headtxtcol=%23ffffff&titlebgcol=%23f1eded&titletxtcol=%23000000&itembgcol=%23ffffff&itemtxtcol=%23000000&ctl=0"></iframe>
+
+</body>
+</html>
